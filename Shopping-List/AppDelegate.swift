@@ -32,18 +32,23 @@ private extension AppDelegate {
         let mainController = MainViewController()
         let mainModel = MainViewModel()
         
-        let editController = self.makeEditViewController()
+        let createController = self.makeCreateViewController(mainController: mainController)
         mainModel.onCreateItem = { [ weak self ] in
             guard let self = self else { return }
-            self.navigationController?.pushViewController(editController, animated: true)
+            self.navigationController?.pushViewController(createController, animated: true)
         }
         mainController.configure(mainModel: mainModel)
         return mainController
     }
     
-    func makeCreateViewController() -> UIViewController {
+    func makeCreateViewController(mainController: MainViewController) -> UIViewController {
         let createController = CreateViewController()
         let createModel = CreateViewModel()
+        
+        createModel.onReturn = { [weak self] in
+            mainController.reloadTableView()
+            self?.navigationController?.popViewController(animated: true)
+        }
         
         createController.configure(createModel: createModel)
         return createController

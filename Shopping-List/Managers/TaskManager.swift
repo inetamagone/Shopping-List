@@ -11,7 +11,7 @@ final class TaskManager {
     
     struct ShoppingItem {
         let name: String?
-        let quantity: Int?
+        let quantity: String?
     }
     
     private var shoppingItems: [ShoppingItem] = []
@@ -20,4 +20,16 @@ final class TaskManager {
     
     private init() {}
     
+    func itemCount() -> Int {
+        return shoppingItems.count
+    }
+    
+    func save(item: ShoppingItem) {
+        shoppingItems.append(item)
+    }
+    
+    func getItem(at index: Int) -> ShoppingItem? {
+        guard index < shoppingItems.count else { return nil }
+        return shoppingItems[index]
+    }
 }
