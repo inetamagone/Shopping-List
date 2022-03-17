@@ -74,10 +74,9 @@ extension MainViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.reuseId, for: indexPath) as? MainTableViewCell,
-              let item = mainModel?.getItem(at: indexPath) else { fatalError() }
-        
-        cell.configure(name: item.name, quantity: item.quantity)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.reuseId, for: indexPath) as? MainTableViewCell else { fatalError() }
+        let item = mainModel?.getItem(at: indexPath)
+        cell.configure(name: item?.name, quantity: item?.quantity)
         return cell
     }
 }
