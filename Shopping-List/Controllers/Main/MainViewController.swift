@@ -24,12 +24,10 @@ class MainViewController: UIViewController {
     func reloadTableView() {
         self.tableView.reloadData()
     }
-
 }
 
 private extension MainViewController {
     func setupItems() {
-        view.backgroundColor = .red
         setNavBar()
         setTableView()
     }
@@ -65,19 +63,23 @@ private extension MainViewController {
     }
     
     @objc func deleteItem() {
-        
+        if mainModel?.getItemCount() != 0 {
+            mainModel?.deleteAllItems()
+            reloadTableView()
+        }
     }
 }
 
 extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return mainModel?.getItemCount() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.reuseId, for: indexPath) as? MainTableViewCell else { fatalError() }
-        cell.configure(name: "Test name", quantity: String(2))
+        let item = mainModel?.getItem(at: indexPath)
+        cell.configure(name: item?.name, quantity: item?.quantity)
         return cell
     }
 }
@@ -85,6 +87,6 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        mainModel?.editItem(at: indexPath)
     }
 }

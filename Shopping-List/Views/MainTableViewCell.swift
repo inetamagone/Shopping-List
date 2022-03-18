@@ -28,7 +28,6 @@ class MainTableViewCell: UITableViewCell {
         nameLabel.text = name
         quantityLabel.text = quantity
     }
-    
 }
 
 private extension MainTableViewCell {
