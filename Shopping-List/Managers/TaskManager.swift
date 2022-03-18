@@ -37,4 +37,8 @@ final class TaskManager {
         guard index < shoppingItems.count else { return }
         shoppingItems[index] = item
     }
+    
+    func deleteItems() {
+        shoppingItems = []
+    }
 }

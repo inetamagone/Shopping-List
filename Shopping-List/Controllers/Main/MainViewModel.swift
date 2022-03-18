@@ -28,4 +28,8 @@ class MainViewModel {
     func editItem(at indexPath: IndexPath) {
         onEditItem?(indexPath.row)
     }
+    
+    func deleteAllItems() {
+        taskManager.deleteItems()
+    }
 }

@@ -63,7 +63,10 @@ private extension MainViewController {
     }
     
     @objc func deleteItem() {
-        
+        if mainModel?.getItemCount() != 0 {
+            mainModel?.deleteAllItems()
+            reloadTableView()
+        }
     }
 }
 
