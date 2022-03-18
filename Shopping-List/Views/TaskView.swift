@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TaskView: UIView {
+final class TaskView: UIView, UITextFieldDelegate {
     
     private let verticalStack = UIStackView()
     private let horizontalDescriptionStack = UIStackView()
@@ -23,11 +23,20 @@ final class TaskView: UIView {
     
     init() {
         super.init(frame: .zero)
+        quantityField.delegate = self
         setupItems()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let quantityField = string.rangeOfCharacter(from: NSCharacterSet.decimalDigits) {
+            return true
+        } else {
+            return false
+        }
     }
     
     func configure(name: String? = nil, quantity: String? = nil) {
@@ -151,6 +160,7 @@ private extension TaskView {
         nameField.textColor = .black
         nameField.textAlignment = .center
         nameField.backgroundColor = .white
+        nameField.autocorrectionType = .no
     }
     
     func setupQuantityField() {
@@ -159,6 +169,8 @@ private extension TaskView {
         quantityField.textColor = .black
         quantityField.textAlignment = .center
         quantityField.backgroundColor = .white
+        quantityField.autocorrectionType = .no
+        quantityField.clearsOnBeginEditing = true
     }
     
     @objc func didTapButton() {
