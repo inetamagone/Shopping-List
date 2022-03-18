@@ -49,6 +49,7 @@ private extension MainTableViewCell {
         ])
         stackView.axis = .horizontal
         stackView.distribution = .fill
+        stackView.spacing = 10
         stackView.addArrangedSubview(nameLabel)
         stackView.addArrangedSubview(quantityLabel)
     }
@@ -56,10 +57,11 @@ private extension MainTableViewCell {
     func setupNameLabel() {
         nameLabel.textColor = .black
         nameLabel.textAlignment = .left
+        nameLabel.numberOfLines = 0
     }
     
     func setupQuantityLabel() {
         quantityLabel.textColor = .black
-        quantityLabel.textAlignment = .center
+        quantityLabel.textAlignment = .right
     }
 }

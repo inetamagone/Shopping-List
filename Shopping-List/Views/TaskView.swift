@@ -32,8 +32,16 @@ final class TaskView: UIView, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // Only numbers allowed in quantity field
         if let quantityField = string.rangeOfCharacter(from: NSCharacterSet.decimalDigits) {
-            return true
+            let currentText = textField.text ?? ""
+            // attempt to read the range changed
+            guard let stringRange = Range(range, in: currentText) else { return false }
+            
+            // add the new text
+            let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+            // make sure the result is under 4 characters
+            return updatedText.count <= 4
         } else {
             return false
         }
