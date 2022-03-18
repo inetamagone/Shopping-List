@@ -11,6 +11,7 @@ class MainViewModel {
     
     private let taskManager = TaskManager.shared
     var onCreateItem: (() -> Void)?
+    var onEditItem: ((Int) -> Void)?
     
     func createItem() {
         self.onCreateItem?()
@@ -22,5 +23,9 @@ class MainViewModel {
     
     func getItem(at indexPath: IndexPath) -> TaskManager.ShoppingItem? {
         return taskManager.getItem(at: indexPath.row)
+    }
+    
+    func editItem(at indexPath: IndexPath) {
+        onEditItem?(indexPath.row)
     }
 }

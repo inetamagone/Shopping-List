@@ -32,4 +32,9 @@ final class TaskManager {
         guard index < shoppingItems.count else { return nil }
         return shoppingItems[index]
     }
+    
+    func editItem(item: ShoppingItem, at index: Int) {
+        guard index < shoppingItems.count else { return }
+        shoppingItems[index] = item
+    }
 }

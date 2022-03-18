@@ -38,7 +38,11 @@ extension CreateViewController {
             taskView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         taskView.onButtonTap = { [ weak self ] (nameField, quantityField) in
-            self?.createModel?.saveItem(nameField: nameField, quantityField: quantityField)
+            if nameField != "" && quantityField != "" {
+                self?.createModel?.saveItem(nameField: nameField, quantityField: quantityField)
+                self?.taskView.configure(name: "", quantity: "")
+            }
         }
+        taskView.configureViewTitle(viewTitle: "Add a Shopping Item")
     }
 }

@@ -29,6 +29,15 @@ final class TaskView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func configure(name: String? = nil, quantity: String? = nil) {
+        nameField.text = name
+        quantityField.text = quantity
+    }
+    
+    func configureViewTitle(viewTitle: String) {
+        self.viewTitle.text = viewTitle
+    }
 }
 
 private extension TaskView {
@@ -66,7 +75,6 @@ private extension TaskView {
         NSLayoutConstraint.activate([
             viewTitle.heightAnchor.constraint(equalToConstant: 60),
         ])
-        viewTitle.text = "Add a Shopping Item"
         viewTitle.font = UIFont(name: "Copperplate-Bold", size: 24)
         viewTitle.textAlignment = .center
     }
